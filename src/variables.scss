@@ -1,0 +1,14 @@
+$blue: #2196F3;
+$blue-darker: #2384d3;
+$blue-darkest: #237ac2;
+$text-grey: #4A4A4A;
+
+%block-shadow{
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+}
+
+%column{
+    display: flex;
+    flex-direction: column;
+}
