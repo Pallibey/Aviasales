@@ -6,6 +6,11 @@
     flex-grow: 1;
 }
 
+.tickets-list{
+    display: flex;
+    flex-direction: column;
+}
+
 .tickets-btn{
     width: 170px;
     height: 50px;
@@ -28,4 +33,9 @@
         background-color: $blue-darkest !important;
         color: white !important;
     }
+}
+
+.btn-more{
+    height: 45px;
+    margin-bottom: 2em;
 }

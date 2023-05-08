@@ -1,0 +1,18 @@
+.error-msg {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    align-self: center;
+    padding: 20px;
+    padding-bottom: 10px;
+    max-width: 330px;
+}
+
+.img{
+    max-width: 150px;
+    margin-bottom: 1.4em;
+}
+
+.error-msg-text {
+    font-size: 15px;
+}
