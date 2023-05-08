@@ -7,7 +7,7 @@ export const serviceSlice = createSlice({
     tickets: [],
     debounce: false,
     isAllTickets: false,
-    isLoading: false,
+    isLoading: true,
     isError: false,
   },
   reducers: {

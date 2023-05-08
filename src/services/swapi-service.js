@@ -47,6 +47,7 @@ export const getTickets = (searchID) => async (dispatch) => {
       dispatch(setDebounceFalse())
     }, 1000)
   } catch (err) {
+    console.log(err)
     dispatch(loadFail())
   }
 }

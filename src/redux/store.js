@@ -11,5 +11,4 @@ const store = configureStore({
     cards: cardsSlice,
   },
 })
-
 export default store
