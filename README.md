@@ -1,1 +1,1 @@
-[Сайт задания](https://aviasales-pallibey.vercel.app/)
+[Сайт задания](https://aviasales-delta-sepia.vercel.app/)
