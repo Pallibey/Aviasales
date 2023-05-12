@@ -3,6 +3,7 @@ import { createSlice } from '@reduxjs/toolkit'
 export const filtersSlice = createSlice({
   name: 'filters',
   initialState: {
+    cardsFilter: 1,
     all: false,
     withoutTransfers: false,
     oneTransfer: false,
@@ -73,10 +74,19 @@ export const filtersSlice = createSlice({
         state.all = true
       }
     },
+    setCardsFilter: (state, action) => {
+      state.cardsFilter = action.payload
+    },
   },
 })
 
-export const { setAll, switchWithoutTransfers, switchOneTransfer, switchTwoTransfers, switchThreeTransfers } =
-  filtersSlice.actions
+export const {
+  setAll,
+  switchWithoutTransfers,
+  switchOneTransfer,
+  switchTwoTransfers,
+  switchThreeTransfers,
+  setCardsFilter,
+} = filtersSlice.actions
 
 export default filtersSlice.reducer

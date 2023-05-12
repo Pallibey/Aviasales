@@ -35,7 +35,7 @@ export const getTickets = (searchID) => async (dispatch) => {
       if (res.status === 500) {
         setTimeout(() => {
           dispatch(setDebounceFalse())
-        }, 5000)
+        }, 1000)
         return
       } else {
         throw new Error()
@@ -43,9 +43,7 @@ export const getTickets = (searchID) => async (dispatch) => {
     }
     const body = await res.json()
     dispatch(loadTicketsSuccess(body))
-    setTimeout(() => {
-      dispatch(setDebounceFalse())
-    }, 1000)
+    dispatch(setDebounceFalse())
   } catch (err) {
     console.log(err)
     dispatch(loadFail())

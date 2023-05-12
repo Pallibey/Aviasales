@@ -7,7 +7,7 @@ export const serviceSlice = createSlice({
     tickets: [],
     debounce: false,
     isAllTickets: false,
-    isLoading: true,
+    isLoading: false,
     isError: false,
   },
   reducers: {
@@ -35,9 +35,6 @@ export const serviceSlice = createSlice({
     loadFail: (state) => {
       state.isLoading = false
       state.isError = true
-    },
-    increaseCountForRender: (state) => {
-      state.countForRender += 5
     },
     setDebounceTrue: (state) => {
       state.debounce = true
