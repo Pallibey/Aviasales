@@ -33,9 +33,7 @@ export const getTickets = (searchID) => async (dispatch) => {
     const res = await fetch(link)
     if (!res.ok) {
       if (res.status === 500) {
-        setTimeout(() => {
-          dispatch(setDebounceFalse())
-        }, 1000)
+        dispatch(setDebounceFalse())
         return
       } else {
         throw new Error()

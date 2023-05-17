@@ -1,7 +1,4 @@
-import NoTickets from '../components/no-tickets/no-tickets'
-import TicketCard from '../components/ticket-card/ticket-card'
-
-import { conditionsConstructor, keyCreater } from './variable-creator'
+import { keyCreater } from './variable-creator'
 
 const removeDuplicates = (arr = []) => {
   let arrForSort = []
@@ -16,8 +13,7 @@ const removeDuplicates = (arr = []) => {
   return arrForSort
 }
 
-const ticketsFiltering = (ticketsArr = [], filters) => {
-  let elements = []
+const ticketsFiltering = (filters) => {
   let transfersCount = []
   if (filters.withoutTransfers) {
     transfersCount.push(0)
@@ -31,23 +27,7 @@ const ticketsFiltering = (ticketsArr = [], filters) => {
   if (filters.threeTransfers) {
     transfersCount.push(3)
   }
-  if (transfersCount.length !== 0) {
-    ticketsArr.forEach((ticket) => {
-      let okTicket = null
-      transfersCount.forEach((count) => {
-        if (conditionsConstructor(ticket, count)) {
-          okTicket = <TicketCard key={keyCreater(ticket)} ticketData={ticket} />
-        }
-      })
-      if (okTicket !== null) {
-        elements.push(okTicket)
-      }
-    })
-  }
-  if (elements.length === 0) {
-    return <NoTickets />
-  }
-  return elements
+  return transfersCount
 }
 
 export { removeDuplicates, ticketsFiltering }

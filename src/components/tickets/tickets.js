@@ -6,6 +6,9 @@ import ErrorMsg from '../error-msg/error-msg'
 import { setCardsFilter } from '../../redux/filters-slice'
 import { removeDuplicates, ticketsFiltering } from '../../utils/filtering'
 import { sortingElements } from '../../utils/sorting'
+import { conditionsConstructor, keyCreater } from '../../utils/variable-creator'
+import NoTickets from '../no-tickets/no-tickets'
+import TicketCard from '../ticket-card/ticket-card'
 
 import classes from './tickets.module.scss'
 
@@ -23,11 +26,28 @@ const Tickets = () => {
     setCountForRender(5)
   }, [filters.all, filters.withoutTransfers, filters.oneTransfer, filters.twoTransfers, filters.threeTransfers])
 
-  const renderTickets = (filteredArr = [], renderCount = 0) => {
+  const renderTickets = (sortedArr = [], renderCount = 0, transfersCount) => {
+    let elements = []
+    if (transfersCount.length !== 0) {
+      sortedArr.forEach((ticket) => {
+        let okTicket = null
+        transfersCount.forEach((count) => {
+          if (conditionsConstructor(ticket, count)) {
+            okTicket = <TicketCard key={keyCreater(ticket)} ticketData={ticket} />
+          }
+        })
+        if (okTicket !== null) {
+          elements.push(okTicket)
+        }
+      })
+    }
+    if (elements.length === 0) {
+      return <NoTickets />
+    }
     let render = []
     for (let i = 0; i < renderCount; i++) {
-      if (filteredArr[i] !== undefined) {
-        render.push(filteredArr[i])
+      if (elements[i] !== undefined) {
+        render.push(elements[i])
       }
     }
     return render
@@ -35,8 +55,8 @@ const Tickets = () => {
 
   let ticketsArr = useMemo(() => removeDuplicates(data.tickets), [data.tickets])
   let sortedArr = useMemo(() => sortingElements(ticketsArr, filters.cardsFilter), [ticketsArr, filters.cardsFilter])
-  let elementsForRender = useMemo(
-    () => ticketsFiltering(sortedArr, filters),
+  let transfersCount = useMemo(
+    () => ticketsFiltering(filters),
     [
       filters.all,
       filters.withoutTransfers,
@@ -72,9 +92,7 @@ const Tickets = () => {
         </button>
       </div>
       {data.isLoading ? <LoadingIndicator /> : null}
-      <ul className={classes['tickets-list']}>
-        {Array.isArray(elementsForRender) ? renderTickets(elementsForRender, countForRender) : elementsForRender}
-      </ul>
+      <ul className={classes['tickets-list']}>{renderTickets(sortedArr, countForRender, transfersCount)}</ul>
       <button
         className={`btn ${classes['btn-active']} ${classes['btn-more']}`}
         onClick={() => {
